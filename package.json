@@ -1,0 +1,24 @@
+{
+  "name": "space-tourism-api",
+  "version": "1.0.0",
+  "description": "SOFT355 CW API",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://jaswoodfb@dev.azure.com/jaswoodfb/SOFT355-CW/_git/space-tourism-API"
+  },
+  "keywords": [
+    "Space",
+    "Tourism",
+    "API"
+  ],
+  "author": "Joe Wood",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1"
+  }
+}
