@@ -1,5 +1,5 @@
 const mongoose = require("../database.js");
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 var FlightSchema = new Schema({
     flightNumber: String,
@@ -14,4 +14,5 @@ var FlightSchema = new Schema({
     leavingLocation: String
 });
 
-module.exports = mongoose.model('Flight', FlightSchema);
+const Flight = mongoose.model('Flight', FlightSchema);
+module.exports = Flight;

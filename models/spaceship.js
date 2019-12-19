@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require("../database.js");
+const Schema = mongoose.Schema;
 
 var SpaceShipSchema = new Schema({
     nameCode: String,
@@ -9,4 +9,5 @@ var SpaceShipSchema = new Schema({
     maxSpeed: Number,
 });
 
-module.exports = mongoose.model('SpaceShip', SpaceShipSchema);
+const Spaceship = mongoose.model('Spaceship', SpaceShipSchema);
+module.exports = Spaceship;
