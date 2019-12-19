@@ -1,10 +1,8 @@
-const Spaceship = require("./models/spaceship.js");
+const express = require('express');
+const app = express();
+const port = 3000;
 
-Spaceship.create({
-    nameCode: "123name",
-    totalSeats: 47,
-    fuelCapacity: 10,
-    age: 1,
-    maxSpeed: 5000
-});
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.listen(port, () => console.log(`Space Tourism API Listening on Port ${port}`));
 
