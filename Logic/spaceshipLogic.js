@@ -4,3 +4,5 @@ var spaceshipRepo = require("../repositories/spaceshipRepo");
 function getAllSpaceships(){
     return spaceshipRepo.getSpaceships();
 }
+
+module.exports.getAllSpaceships = getAllSpaceships;

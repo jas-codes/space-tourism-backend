@@ -9,5 +9,5 @@ var SpaceShipSchema = new Schema({
     maxSpeed: Number,
 });
 
-const Spaceship = mongoose.model('Spaceship', SpaceShipSchema);
+var Spaceship = mongoose.model('Spaceship', SpaceShipSchema);
 module.exports = Spaceship;

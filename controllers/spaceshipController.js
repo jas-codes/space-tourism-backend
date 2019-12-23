@@ -1,8 +1,6 @@
-var spaceshipLogic = require("../Logic/spaceshipLogic.js");
-
-console.log('yes we are here');
+var spaceshipLogic = require("../Logic/spaceshipLogic");
 
 /* GET spaceshipListings listing. */
 exports.spaceshipList = function(req, res) {
-  res.send("in the spaceship controller");
+  res.send(spaceshipLogic.getAllSpaceships());
 };

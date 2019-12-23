@@ -1,5 +1,7 @@
-const spaceshipSchema = require("../models/spaceship");
+var Spaceship = require("../models/spaceship");
 
 async function getSpaceships() {
-    return await spaceshipSchema.Spaceship.find();
+    return await Spaceship.find();
 }
+
+module.exports.getSpaceships = getSpaceships;
