@@ -1,8 +1,8 @@
 var spaceship = require("../models/spaceship");
 var spaceshipRepo = require("../repositories/spaceshipRepo");
 
-function getAllSpaceships(){
-    return spaceshipRepo.getSpaceships();
+async function getAllSpaceships(){
+    return await spaceshipRepo.getSpaceships();
 }
 
 module.exports.getAllSpaceships = getAllSpaceships;

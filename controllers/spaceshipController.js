@@ -1,6 +1,7 @@
 var spaceshipLogic = require("../Logic/spaceshipLogic");
 
 /* GET spaceshipListings listing. */
-exports.spaceshipList = function(req, res) {
-  res.send(spaceshipLogic.getAllSpaceships());
+exports.spaceshipList = async function(req, res) {
+  var result = await spaceshipLogic.getAllSpaceships();
+  res.send(result);
 };
