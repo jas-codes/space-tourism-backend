@@ -8,11 +8,11 @@ var FlightSchema = new Schema({
         ref: 'SpaceShipSchema'
     },
     depatureDate: Date,
-    arrivalTime: Date,
-    Gate: String,
+    arrivalDate: Date,
+    gate: String,
     destination: String,
     leavingLocation: String
 });
 
-const Flight = mongoose.model('Flight', FlightSchema);
+const Flight = mongoose.model('SpaceFlight', FlightSchema);
 module.exports = Flight;
