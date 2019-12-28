@@ -6,7 +6,7 @@ async function getSpaceFlights(){
 
 function createSpaceFlight(req) {
     var flight = new SpaceFlight({
-        depatureDate: req.body.depatureDate,
+        departureDate: req.body.departureDate,
         arrivalDate: req.body.arrivalDate,
         gate: req.body.gate,
         destination: req.body.destination,

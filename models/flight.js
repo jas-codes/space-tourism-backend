@@ -7,7 +7,7 @@ var FlightSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SpaceShipSchema'
     },
-    depatureDate: Date,
+    departureDate: Date,
     arrivalDate: Date,
     gate: String,
     destination: String,

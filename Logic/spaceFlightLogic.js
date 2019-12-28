@@ -10,23 +10,38 @@ function createSpaceFlight(req){
 }
 
 //get all flights
-async function getAllSpaceFlights(){
-    flights = await SpaceFlightRepo.getSpaceFlights();
+function getAllSpaceFlights(){
+    var flightsVMPromise = new Promise( async function(resolve, reject) {
+        var flights = await SpaceFlightRepo.getSpaceFlights();
 
-    var flightsVM = [];
+        var flightsVM = [];
 
-    flights.forEach(function(flight) {
-        shipId = flight.ship;
-        ship = SpaceshipLogic.getSpaceshipById(shipId);
-        flightsVM.push(createSpaceFlightVM(ship, flight))
+        console.log(flights);
+        flights.forEach( async function(flight) {
+            shipId = flight.ship;
+            ship = await SpaceshipLogic.getSpaceshipById(shipId);
+            flightsVM.push(createSpaceFlightVM(ship, flight))
+        });
+        console.log(flightsVM);
+        if(flightsVM.length > 0)
+            resolve("flights retrieved");
+        else {
+            reject(Error("Error Combining Flights with ships"));
+        }
     });
-    
-    return flightsVM;
+
+    return flightsVMPromise;
 }
 
 function createSpaceFlightVM(ship, flight){
+    console.log('ship');
+    console.log(ship);
+    console.log('flight');
+    console.log(flight.departureDate);
+
     var vm = new SpaceFlightVM(ship, flight.arrivalDate,
         flight.departureDate, flight.gate, flight.flightNumber, flight.leavingLocation);
+    console.log(vm);
     return vm;
 }
 

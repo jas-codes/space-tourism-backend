@@ -8,8 +8,8 @@ function createSpaceship(req){
     return spaceshipRepo.createSpaceship(req);
 }
 
-function getSpaceshipById(shipId){
-    return spaceshipRepo.getSpaceshipById(shipId);
+async function getSpaceshipById(shipId){
+    return await spaceshipRepo.getSpaceshipById(shipId);
 }
 
 module.exports.getSpaceshipById = getSpaceshipById;

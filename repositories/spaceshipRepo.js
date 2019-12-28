@@ -1,11 +1,13 @@
 var Spaceship = require("../models/spaceship");
+const mongoose = require("../database.js");
+
 
 async function getSpaceships() {
     return await Spaceship.find();
 }
 
-function getSpaceshipById(shipId){
-    return Spaceship.findById(shipId);
+async function getSpaceshipById(ship) {
+    return await Spaceship.find(mongoose.Types.ObjectId(String(ship)));
 }
 
 function createSpaceship(req) {
