@@ -20,13 +20,13 @@ async function getAllSpaceFlights(){
             ship = await SpaceshipLogic.getSpaceshipById(shipId);
             flightsVM.push( createSpaceFlightVM(ship, flight))
         }
-        
+
         return flightsVM;
     }
 
 function createSpaceFlightVM(ship, flight){
     var vm = new SpaceFlightVM(ship, flight.arrivalDate,
-        flight.departureDate, flight.gate, flight.flightNumber, flight.leavingLocation);
+        flight.departureDate, flight.gate, flight.flightNumber, flight.leavingLocation, flight.destination);
     return vm;
 }
 
