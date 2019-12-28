@@ -6,10 +6,5 @@ exports.createSpaceFlight = async function(req, res) {
 }
 
 exports.getAllSpaceFlights = async function(req, res) {
-    var result = await spaceFlightLogic.getAllSpaceFlights();
-    result.then(function(res) {
-        res.send(res);
-    }, function(err) {
-        res.send(status(500) + error);
-    });
+    res.send(await spaceFlightLogic.getAllSpaceFlights());
 }
