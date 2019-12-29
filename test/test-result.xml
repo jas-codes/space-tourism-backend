@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.40800000000000003" tests="4" failures="1">
+  <testsuite name="Root Suite" timestamp="2019-12-29T21:44:08" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="/GET all spaceFlights" timestamp="2019-12-29T21:44:08" tests="1" file="C:\Users\Joe&apos;s Laptop\Documents\Important Documents\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0.342">
+    <testcase name="/GET all spaceFlights it should GET all the spaceflights" time="0.342" classname="it should GET all the spaceflights">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing logic for spaceFlights" timestamp="2019-12-29T21:44:08" tests="1" file="C:\Users\Joe&apos;s Laptop\Documents\Important Documents\SOFT355\Coursework\space-tourism-API\test\spaceFlightLogicTests.js" failures="1" time="0">
+    <testcase name="Testing logic for spaceFlights should create a flightVM model" time="0" classname="should create a flightVM model">
+      <failure message="type.toLowerCase is not a function" type="TypeError"><![CDATA[TypeError: type.toLowerCase is not a function
+    at Proxy.an (node_modules\chai\lib\chai\core\assertions.js:302:17)
+    at Proxy.chainableMethodWrapper (node_modules\chai\lib\chai\utils\addChainableMethod.js:113:49)
+    at Function.assert.typeOf (node_modules\chai\lib\chai\interface\assert.js:839:56)
+    at Context.<anonymous> (test\spaceFlightLogicTests.js:35:16)
+    at processImmediate (internal/timers.js:439:21)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="/GET Tests for spaceship Controller" timestamp="2019-12-29T21:44:08" tests="2" file="C:\Users\Joe&apos;s Laptop\Documents\Important Documents\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0.066">
+    <testcase name="/GET Tests for spaceship Controller it should GET all the spaceships" time="0.037" classname="it should GET all the spaceships">
+    </testcase>
+    <testcase name="/GET Tests for spaceship Controller it should GET the spaceships by the id" time="0.029" classname="it should GET the spaceships by the id">
+    </testcase>
+  </testsuite>
+</testsuites>
