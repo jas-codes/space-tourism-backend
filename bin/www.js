@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('space-tourism-api:server');
 var http = require('http');
+var socketIO = require('socket.io');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,14 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * create web socket server
+ */
+
+var io = socketIO(server);
+
+module.exports = io;
 
 /**
  * Listen on provided port, on all network interfaces.
