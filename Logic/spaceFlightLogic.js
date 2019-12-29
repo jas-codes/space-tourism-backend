@@ -30,6 +30,7 @@ function createSpaceFlightVM(ship, flight){
     return vm;
 }
 
+module.exports.createSpaceFlightVM = createSpaceFlightVM;
 module.exports.createSpaceFlight = createSpaceFlight;
 module.exports.getAllSpaceFlights = getAllSpaceFlights;
 
