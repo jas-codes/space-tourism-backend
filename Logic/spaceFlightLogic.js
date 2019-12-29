@@ -18,7 +18,7 @@ async function getAllSpaceFlights(){
         for (let flight of flights) {
             shipId = flight.ship;
             ship = await SpaceshipLogic.getSpaceshipById(shipId);
-            flightsVM.push( createSpaceFlightVM(ship, flight))
+            flightsVM.push(createSpaceFlightVM(ship, flight));
         }
 
         return flightsVM;

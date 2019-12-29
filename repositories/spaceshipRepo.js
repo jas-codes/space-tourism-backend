@@ -7,7 +7,7 @@ async function getSpaceships() {
 }
 
 async function getSpaceshipById(ship) {
-    return await Spaceship.find(mongoose.Types.ObjectId(String(ship)));
+    return await Spaceship.findOne(mongoose.Types.ObjectId(String(ship)));
 }
 
 function createSpaceship(req) {
