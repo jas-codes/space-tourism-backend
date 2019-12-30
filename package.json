@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./app.js",
     "test": "mocha --timeout 20000 --reporter mocha-junit-reporter --reporter-options mochaFile=./test/test-result.xml"
   },
   "dependencies": {
@@ -18,7 +18,8 @@
     "jade": "~1.11.0",
     "mocha-junit-reporter": "^1.23.1",
     "mongoose": "^5.8.2",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "mocha": "^6.2.2"

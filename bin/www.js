@@ -22,6 +22,35 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * create web socket server
+ */
+
+var io = socketIO(server);
+
+// io.on('connection', function(socket) {
+//   let previousId;
+//   const safeJoin = currentId => {
+//     socket.leave(previousId);
+//     socket.join(currentId);
+//     previousId = currentId;
+//   }
+//   console.log('connected client');
+//   io.send({row: 1, seat: 'A'});
+//   socket.on('getSeat', seatId => {
+//     safeJoin(seatId);
+//     console.log(seatId);
+//     console.log('test emit');
+//     socket.emit('seat', {row: (seatId+Math.random()), seat: 'B'});
+//   });
+//   socket.on('disconnect', () => {
+//       console.log('client disconnected');
+//   });
+  
+// });
+
+module.exports = io;
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
