@@ -41,7 +41,7 @@ io.on('connection', function(socket) {
     safeJoin(seatId);
     console.log(seatId);
     console.log('test emit');
-    io.emit('seat', {row: (seatId+Math.random()), seat: 'B'});
+    socket.emit('seat', {row: (seatId+Math.random()), seat: 'B'});
   });
   socket.on('disconnect', () => {
       console.log('client disconnected');
