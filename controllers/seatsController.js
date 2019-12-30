@@ -1,3 +1,6 @@
-var io = require('../bin/www');
 
 
+exports.createConnection = async function (req, res) {
+    console.log('hit')
+    res.send(status(200));
+}
