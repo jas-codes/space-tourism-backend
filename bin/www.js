@@ -28,6 +28,27 @@ var server = http.createServer(app);
 
 var io = socketIO(server);
 
+io.on('connection', function(socket) {
+  let previousId;
+  const safeJoin = currentId => {
+    socket.leave(previousId);
+    socket.join(currentId);
+    previousId = currentId;
+  }
+  console.log('connected client');
+  io.send({row: 1, seat: 'A'});
+  socket.on('getSeat', seatId => {
+    safeJoin(seatId);
+    console.log(seatId);
+    console.log('test emit');
+    io.emit('seat', {row: (seatId+Math.random()), seat: 'B'});
+  });
+  socket.on('disconnect', () => {
+      console.log('client disconnected');
+  });
+  
+});
+
 module.exports = io;
 
 /**
