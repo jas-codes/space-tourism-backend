@@ -11,6 +11,7 @@ var FlightSchema = new Schema({
     arrivalDate: Date,
     gate: String,
     destination: String,
+    availableSeats: Number,
     leavingLocation: String
 });
 

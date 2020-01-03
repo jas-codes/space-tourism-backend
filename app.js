@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var spaceshipRouter = require('./routes/spaceshipRoutes');
 var spaceFlightRouter = require('./routes/spaceFlightRoutes');
 var seatRouter = require('./routes/seatRoutes');
+var ticketRouter = require('./routes/ticketRoutes');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/spaceship', spaceshipRouter);
 app.use('/flights', spaceFlightRouter);
 app.use('/seats', seatRouter);
+app.use('/tickets', ticketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

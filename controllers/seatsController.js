@@ -1,6 +1,6 @@
+var SpaceFlightLogic = require('../Logic/spaceFlightLogic');
 
-
-exports.createConnection = async function (req, res) {
-    console.log('hit')
-    res.send(status(200));
+exports.updateAvailableSeats = async function (req, res) {
+    var result = await SpaceFlightLogic.updateFlightSeats(req);
+    res.send(result);
 }
