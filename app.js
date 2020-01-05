@@ -129,7 +129,8 @@ function onListening() {
 }
 
 var io = socketIO(server);
-
+var AuctionLogic = require('./Logic/AuctionLogic');
+const bids = {};
 
 io.on('connection', function (socket) {
   let previousId;
@@ -138,18 +139,34 @@ io.on('connection', function (socket) {
       socket.join(currentId);
       previousId = currentId;
   }
-  console.log('connected client');
-  io.send({ row: 1, seat: 'A' });
-  socket.on('getSeat', seatId => {
-      safeJoin(seatId);
-      console.log(seatId);
-      console.log('test emit');
-      socket.emit('seat', { row: (seatId + Math.random()), seat: 'B' });
-  });
-  socket.on('disconnect', () => {
-      console.log('client disconnected');
+  var flight;
+
+  socket.on('registerForFlightAuction', flightNumber => {
+    safeJoin(flightNumber);
+    flight = flightNumber;
+    let participants = AuctionLogic.addParticipants();
+    socket.emit('noOfBidders', participants);
   });
 
+  socket.on('readyToAuction', () => {
+    AuctionLogic.addReadyParticipants();
+    console.log(flight);
+    if(!AuctionLogic.ready())
+      socket.to(flight).emit('otherPlayersReady', true);
+    else{
+      io.in(flight).emit('beginAuction', true);
+      AuctionLogic.beginTimer(io,flight);
+    }  
+  });
+
+  socket.on('bid', bid => {
+    bids[]
+  })
+
+  socket.on('disconnect', () => {
+    AuctionLogic.removeParticipants();
+    console.log('client disconnected');
+  });
 });
 
 module.exports = app;
