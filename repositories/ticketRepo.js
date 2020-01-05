@@ -1,6 +1,7 @@
 var Ticket = require('../models/ticket');
 
 async function createTicket(req) {
+    console.log(req.body);
     var ticket = new Ticket({
         flightNumber: req.body.flightNumber,
         ticketNumber: req.body.ticketNumber,
@@ -9,7 +10,8 @@ async function createTicket(req) {
         dob: req.body.dob,
         passportNumber: req.body.passportNumber,
         seatQuantity: req.body.seatQuantity,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        seats: req.body.seats
     });
     ticket.save(function (err) {
         if (err) return err

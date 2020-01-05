@@ -10,8 +10,8 @@ var TicketSchema = new Schema({
     dob: Date,
     passportNumber: Number,
     seats: [{
-        rowNumber: Number,
-        seatPosition: String
+        seatNo: Number,
+        seatCode: String
     }],
     emailAddress: String
 });
