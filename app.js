@@ -133,6 +133,7 @@ var AuctionLogic = require('./Logic/AuctionLogic');
 var Auctions = [];
 
 io.on('connection', function (socket) {
+  console.log('client connected');
   let previousId;
   const safeJoin = currentId => {
       socket.leave(previousId);
@@ -150,8 +151,6 @@ io.on('connection', function (socket) {
       return (auction.flightNumber == flightNumber);
     });
 
-    console.log(alreadyCreated);
-
     if(alreadyCreated > -1)
     { 
       auctionLogic = Auctions[alreadyCreated];
@@ -160,15 +159,12 @@ io.on('connection', function (socket) {
       Auctions.push(auctionLogic);
     }
 
-
-    console.log(auctionLogic);
     let participants = auctionLogic.addParticipants();
-    socket.emit('noOfBidders', participants);
+    io.in(flight).emit('noOfBidders', participants);
   });
 
   socket.on('readyToAuction', () => {
     auctionLogic.addReadyParticipants();
-    console.log(flight);
     if(!auctionLogic.ready())
       socket.to(flight).emit('otherPlayersReady', true);
     else{
@@ -181,8 +177,16 @@ io.on('connection', function (socket) {
     auctionLogic.setHighestBid(amount, io);
   });
 
+  socket.on('clearAuctionHouse', () => {
+    let set = new Set(Auctions);
+    set.delete(auctionLogic);
+    Auctions = Array.from(set);
+    console.log(Auctions);
+  })
+
   socket.on('disconnect', () => {
     auctionLogic.removeParticipants();
+    io.in(flight).emit('noOfBidders', auctionLogic.participants);
     if(auctionLogic.participants == 0){
       let set = new Set(Auctions);
       set.delete(auctionLogic);

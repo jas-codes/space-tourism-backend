@@ -1,6 +1,3 @@
-
-
-
 class AuctionLogic {
     participants = 0;
     readyParticipants = 0;
@@ -45,7 +42,7 @@ class AuctionLogic {
     }
 
     beginTimer(io, flight) {
-        var timeLeft = 11;
+        var timeLeft = 21;
         var timer = setInterval(function () {
             timeLeft--;
             if (timeLeft < 0) {
