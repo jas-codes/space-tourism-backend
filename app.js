@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var spaceshipRouter = require('./routes/spaceshipRoutes');
 var spaceFlightRouter = require('./routes/spaceFlightRoutes');
 var seatRouter = require('./routes/seatRoutes');
+var ticketRouter = require('./routes/ticketRoutes');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/spaceship', spaceshipRouter);
 app.use('/flights', spaceFlightRouter);
 app.use('/seats', seatRouter);
+app.use('/tickets', ticketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -127,7 +129,8 @@ function onListening() {
 }
 
 var io = socketIO(server);
-
+var AuctionLogic = require('./Logic/AuctionLogic');
+var Auctions = [];
 
 io.on('connection', function (socket) {
   let previousId;
@@ -136,18 +139,57 @@ io.on('connection', function (socket) {
       socket.join(currentId);
       previousId = currentId;
   }
-  console.log('connected client');
-  io.send({ row: 1, seat: 'A' });
-  socket.on('getSeat', seatId => {
-      safeJoin(seatId);
-      console.log(seatId);
-      console.log('test emit');
-      socket.emit('seat', { row: (seatId + Math.random()), seat: 'B' });
-  });
-  socket.on('disconnect', () => {
-      console.log('client disconnected');
+  var auctionLogic = new AuctionLogic('');
+  var flight;
+
+  socket.on('registerForFlightAuction', flightNumber => {
+    safeJoin(flightNumber);
+    flight = flightNumber;
+
+    alreadyCreated = Auctions.findIndex((auction) => {
+      return (auction.flightNumber == flightNumber);
+    });
+
+    console.log(alreadyCreated);
+
+    if(alreadyCreated > -1)
+    { 
+      auctionLogic = Auctions[alreadyCreated];
+    } else {
+      auctionLogic = new AuctionLogic(flightNumber);
+      Auctions.push(auctionLogic);
+    }
+
+
+    console.log(auctionLogic);
+    let participants = auctionLogic.addParticipants();
+    socket.emit('noOfBidders', participants);
   });
 
+  socket.on('readyToAuction', () => {
+    auctionLogic.addReadyParticipants();
+    console.log(flight);
+    if(!auctionLogic.ready())
+      socket.to(flight).emit('otherPlayersReady', true);
+    else{
+      io.in(flight).emit('beginAuction', true);
+      auctionLogic.beginTimer(io,flight);
+    }  
+  });
+
+  socket.on('bid', amount => {
+    auctionLogic.setHighestBid(amount, io);
+  });
+
+  socket.on('disconnect', () => {
+    auctionLogic.removeParticipants();
+    if(auctionLogic.participants == 0){
+      let set = new Set(Auctions);
+      set.delete(auctionLogic);
+      Auctions = Array.from(set);
+    }
+    console.log('client disconnected');
+  });
 });
 
 module.exports = app;

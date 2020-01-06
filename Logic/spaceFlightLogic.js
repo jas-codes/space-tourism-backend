@@ -5,14 +5,13 @@ var SpaceFlightVM = require('../models/flightVM');
 var SpaceFlight = require('../models/flight');
 
 //create a flight
-function createSpaceFlight(req){
+function createSpaceFlight(req) {
     return SpaceFlightRepo.createSpaceFlight(req);
 }
 
 //get all flights
-async function getAllSpaceFlights(){
+async function getAllSpaceFlights() {
         var flights = await SpaceFlightRepo.getSpaceFlights();
-
         var flightsVM = [];
 
         for (let flight of flights) {
@@ -24,12 +23,18 @@ async function getAllSpaceFlights(){
         return flightsVM;
     }
 
-function createSpaceFlightVM(ship, flight){
+function createSpaceFlightVM(ship, flight) {
     var vm = new SpaceFlightVM(ship, flight.arrivalDate,
-        flight.departureDate, flight.gate, flight.flightNumber, flight.leavingLocation, flight.destination);
+        flight.departureDate, flight.gate, flight.flightNumber, flight.leavingLocation,
+        flight.destination, flight.availableSeats);
     return vm;
 }
 
+function updateFlightSeats(flight, numberOfSeats) {
+    return SpaceFlightRepo.updateFlightSeats(flight, numberOfSeats);
+}
+
+module.exports.updateFlightSeats = updateFlightSeats;
 module.exports.createSpaceFlightVM = createSpaceFlightVM;
 module.exports.createSpaceFlight = createSpaceFlight;
 module.exports.getAllSpaceFlights = getAllSpaceFlights;
