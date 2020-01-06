@@ -130,7 +130,7 @@ function onListening() {
 
 var io = socketIO(server);
 var AuctionLogic = require('./Logic/AuctionLogic');
-const bids = {};
+var Auctions = [];
 
 io.on('connection', function (socket) {
   let previousId;
@@ -139,32 +139,55 @@ io.on('connection', function (socket) {
       socket.join(currentId);
       previousId = currentId;
   }
+  var auctionLogic = new AuctionLogic('');
   var flight;
 
   socket.on('registerForFlightAuction', flightNumber => {
     safeJoin(flightNumber);
     flight = flightNumber;
-    let participants = AuctionLogic.addParticipants();
+
+    alreadyCreated = Auctions.findIndex((auction) => {
+      return (auction.flightNumber == flightNumber);
+    });
+
+    console.log(alreadyCreated);
+
+    if(alreadyCreated > -1)
+    { 
+      auctionLogic = Auctions[alreadyCreated];
+    } else {
+      auctionLogic = new AuctionLogic(flightNumber);
+      Auctions.push(auctionLogic);
+    }
+
+
+    console.log(auctionLogic);
+    let participants = auctionLogic.addParticipants();
     socket.emit('noOfBidders', participants);
   });
 
   socket.on('readyToAuction', () => {
-    AuctionLogic.addReadyParticipants();
+    auctionLogic.addReadyParticipants();
     console.log(flight);
-    if(!AuctionLogic.ready())
+    if(!auctionLogic.ready())
       socket.to(flight).emit('otherPlayersReady', true);
     else{
       io.in(flight).emit('beginAuction', true);
-      AuctionLogic.beginTimer(io,flight);
+      auctionLogic.beginTimer(io,flight);
     }  
   });
 
-  socket.on('bid', bid => {
-    bids[]
-  })
+  socket.on('bid', amount => {
+    auctionLogic.setHighestBid(amount, io);
+  });
 
   socket.on('disconnect', () => {
-    AuctionLogic.removeParticipants();
+    auctionLogic.removeParticipants();
+    if(auctionLogic.participants == 0){
+      let set = new Set(Auctions);
+      set.delete(auctionLogic);
+      Auctions = Array.from(set);
+    }
     console.log('client disconnected');
   });
 });

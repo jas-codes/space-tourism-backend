@@ -1,7 +1,6 @@
 var Ticket = require('../models/ticket');
 
 async function createTicket(req) {
-    console.log(req.body);
     var ticket = new Ticket({
         flightNumber: req.body.flightNumber,
         ticketNumber: req.body.ticketNumber,

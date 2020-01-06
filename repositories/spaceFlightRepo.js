@@ -21,11 +21,13 @@ function createSpaceFlight(req) {
     return 201;
 }
 
-function updateFlightSeats(req) {
-    var query = { flightNumber: req.body.flightNumber };
-    SpaceFlight.update(query, { availableSeats: req.body.availableSeats }, function (err, raw) {
+async function updateFlightSeats(flightNumber, noOfSeats) {
+    var query = { flightNumber: flightNumber };
+    var flight = await SpaceFlight.findOne(query);
+    var seats = parseInt(flight.availableSeats) - parseInt(noOfSeats);
+    SpaceFlight.update(query, { availableSeats: seats.toString() }, function (err, raw) {
         if (err) {
-            console.log(err);
+            console.log("error:\n" +err);
             return 500;
         }
     });

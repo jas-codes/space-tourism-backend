@@ -12,7 +12,6 @@ function createSpaceFlight(req) {
 //get all flights
 async function getAllSpaceFlights() {
         var flights = await SpaceFlightRepo.getSpaceFlights();
-
         var flightsVM = [];
 
         for (let flight of flights) {
@@ -31,8 +30,8 @@ function createSpaceFlightVM(ship, flight) {
     return vm;
 }
 
-function updateFlightSeats(req) {
-    return SpaceFlightRepo.updateFlightSeats(req);
+function updateFlightSeats(flight, numberOfSeats) {
+    return SpaceFlightRepo.updateFlightSeats(flight, numberOfSeats);
 }
 
 module.exports.updateFlightSeats = updateFlightSeats;
