@@ -18,4 +18,9 @@ async function createTicket(req) {
     return 201;
 }
 
+async function getTicketById(ticketNumber) {
+    return await Ticket.findOne({ticketNumber:String(ticketNumber)});
+}
+
 module.exports.createTicket = createTicket;
+module.exports.getTicketById = getTicketById;

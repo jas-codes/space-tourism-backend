@@ -14,4 +14,10 @@ function createReservedSeats(seats, flightNumber){
     }
 }
 
+async function getTicketById(ticketNumber){
+    return await TicketRepo.getTicketById(ticketNumber);
+}
+
+module.exports.createReservedSeats = createReservedSeats;
+module.exports.getTicketById = getTicketById;
 module.exports.createTicket = createTicket;
