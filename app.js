@@ -130,7 +130,7 @@ function onListening() {
 
 var io = socketIO(server);
 var AuctionLogic = require('./Logic/AuctionLogic');
-var Auctions = [];
+var Auctions = []; //currently active auctions
 
 io.on('connection', function (socket) {
   console.log('client connected');
@@ -143,11 +143,12 @@ io.on('connection', function (socket) {
   var auctionLogic = new AuctionLogic('');
   var flight;
 
+  //register for the auction
   socket.on('registerForFlightAuction', flightNumber => {
-    safeJoin(flightNumber);
+    safeJoin(flightNumber); //join room
     flight = flightNumber;
 
-    alreadyCreated = Auctions.findIndex((auction) => {
+    alreadyCreated = Auctions.findIndex((auction) => { //if the auctionLogic/house for that flight is already set up
       return (auction.flightNumber == flightNumber);
     });
 
@@ -159,17 +160,18 @@ io.on('connection', function (socket) {
       Auctions.push(auctionLogic);
     }
 
-    let participants = auctionLogic.addParticipants();
-    io.in(flight).emit('noOfBidders', participants);
+    io.in(flight).emit('noOfBidders', auctionLogic.addParticipants());
   });
 
   socket.on('readyToAuction', () => {
     auctionLogic.addReadyParticipants();
+
+    //if all players are ready or not
     if(!auctionLogic.ready())
       socket.to(flight).emit('otherPlayersReady', true);
     else{
       io.in(flight).emit('beginAuction', true);
-      auctionLogic.beginTimer(io,flight);
+      auctionLogic.beginTimer(io, flight);
     }  
   });
 
@@ -177,23 +179,44 @@ io.on('connection', function (socket) {
     auctionLogic.setHighestBid(amount, io);
   });
 
+  //wipe the current auction
   socket.on('clearAuctionHouse', () => {
-    let set = new Set(Auctions);
-    set.delete(auctionLogic);
-    Auctions = Array.from(set);
-    console.log(Auctions);
+    console.log(`closing auction ${flight}`);
+    clearAuctionInstance(auctionLogic)
   })
 
-  socket.on('disconnect', () => {
+  //if someone leaves an auction prematurely
+  socket.on('closeAuctionDisconnect', () => {
     auctionLogic.removeParticipants();
-    io.in(flight).emit('noOfBidders', auctionLogic.participants);
+    socket.leave(flight);
+
+    io.in(flight).emit('noOfBidders', auctionLogic.participants); //update bidders
+
     if(auctionLogic.participants == 0){
-      let set = new Set(Auctions);
-      set.delete(auctionLogic);
-      Auctions = Array.from(set);
+      clearAuctionInstance(auctionLogic);
     }
     console.log('client disconnected');
   });
+
+  //if the socket disconnects then follow these directions
+  socket.on('disconnect', () => {
+    auctionLogic.removeParticipants();
+    socket.leave(flight);
+
+    io.in(flight).emit('noOfBidders', auctionLogic.participants);
+
+    if(auctionLogic.participants == 0){
+      clearAuctionInstance(auctionLogic);
+    }
+    console.log('client disconnected');
+  })
 });
+
+function clearAuctionInstance(auctionLogic){
+  auctionLogic.closeAuction();
+  let set = new Set(Auctions);
+  set.delete(auctionLogic);
+  Auctions = Array.from(set);
+}
 
 module.exports = app;
