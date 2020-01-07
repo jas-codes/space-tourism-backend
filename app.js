@@ -127,9 +127,9 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
+ //=============================================================================================================================================
 var io = socketIO(server);
-var AuctionLogic = require('./Logic/AuctionLogic');
+var AuctionLogic = require('./Logic/auctionLogic');
 var Auctions = []; //currently active auctions
 
 io.on('connection', function (socket) {

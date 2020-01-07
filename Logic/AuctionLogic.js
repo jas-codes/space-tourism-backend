@@ -50,7 +50,6 @@ class AuctionLogic {
 
     //sets whether players are ready or not
     ready() {
-        console.log(this.readyParticipants);
         if (this.readyParticipants != this.participants)
             return false;
         else
