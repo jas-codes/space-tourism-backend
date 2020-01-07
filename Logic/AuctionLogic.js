@@ -1,12 +1,11 @@
-
-
-
 class AuctionLogic {
     participants = 0;
     readyParticipants = 0;
     bids = [];
     highestBid = 0;
-    flightNumber
+    flightNumber;
+    startTimerValue = 21;
+    auctionTimeRemaining = 21;
 
     constructor(flightNumber) {
         this.flightNumber = flightNumber
@@ -24,7 +23,6 @@ class AuctionLogic {
     removeParticipants() {
         if (this.participants > 0) {
             this.participants--;
-            this.readyParticipants--;
         } else {
             this.readyParticipants = 0;
             this.participants = 0;
@@ -32,12 +30,27 @@ class AuctionLogic {
         return this.participants;
     }
 
+    //sets all values to zero in the auction as a just in case
+    closeAuction() {
+        this.participants = 0;
+        this.readyParticipants = 0;
+        this.bids = [];
+        this.highestBid = 0;
+    }
+
+    removeReadyParticipants() {
+        this.readyParticipants--;
+        return this.readyParticipants;
+    }
+
     addReadyParticipants() {
         this.readyParticipants++;
         return this.readyParticipants;
     }
 
+    //sets whether players are ready or not
     ready() {
+        console.log(this.readyParticipants);
         if (this.readyParticipants != this.participants)
             return false;
         else
@@ -45,18 +58,23 @@ class AuctionLogic {
     }
 
     beginTimer(io, flight) {
-        var timeLeft = 11;
-        var timer = setInterval(function () {
-            timeLeft--;
-            if (timeLeft < 0) {
-                io.in(flight).emit('endAuction', true);
-                clearInterval(timer);
-            } else {
-                io.in(flight).emit('timeRemaining', timeLeft);
-            }
-        }, 1000);
+        let context = this;// provide context to interval function
+
+        if (this.auctionTimeRemaining >= this.startTimerValue) { //if timer already counting don't start another
+            var timer = setInterval(function () {
+                context.auctionTimeRemaining--;
+                //emit updates or end of auction
+                if (context.auctionTimeRemaining < 0) {
+                    io.in(flight).emit('endAuction', true);
+                    clearInterval(timer);
+                } else {
+                    io.in(flight).emit('timeRemaining', context.auctionTimeRemaining);
+                }
+            }, 1000, context);
+        }
     }
 
+    //sets the highest bid with validation
     setHighestBid(bid, io) {
         bid = parseInt(bid);
         if (bid > this.highestBid) {

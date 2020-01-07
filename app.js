@@ -130,9 +130,10 @@ function onListening() {
 
 var io = socketIO(server);
 var AuctionLogic = require('./Logic/AuctionLogic');
-var Auctions = [];
+var Auctions = []; //currently active auctions
 
 io.on('connection', function (socket) {
+  console.log('client connected');
   let previousId;
   const safeJoin = currentId => {
       socket.leave(previousId);
@@ -142,15 +143,14 @@ io.on('connection', function (socket) {
   var auctionLogic = new AuctionLogic('');
   var flight;
 
+  //register for the auction
   socket.on('registerForFlightAuction', flightNumber => {
-    safeJoin(flightNumber);
+    safeJoin(flightNumber); //join room
     flight = flightNumber;
 
-    alreadyCreated = Auctions.findIndex((auction) => {
+    alreadyCreated = Auctions.findIndex((auction) => { //if the auctionLogic/house for that flight is already set up
       return (auction.flightNumber == flightNumber);
     });
-
-    console.log(alreadyCreated);
 
     if(alreadyCreated > -1)
     { 
@@ -160,20 +160,18 @@ io.on('connection', function (socket) {
       Auctions.push(auctionLogic);
     }
 
-
-    console.log(auctionLogic);
-    let participants = auctionLogic.addParticipants();
-    socket.emit('noOfBidders', participants);
+    io.in(flight).emit('noOfBidders', auctionLogic.addParticipants());
   });
 
   socket.on('readyToAuction', () => {
     auctionLogic.addReadyParticipants();
-    console.log(flight);
+
+    //if all players are ready or not
     if(!auctionLogic.ready())
       socket.to(flight).emit('otherPlayersReady', true);
     else{
       io.in(flight).emit('beginAuction', true);
-      auctionLogic.beginTimer(io,flight);
+      auctionLogic.beginTimer(io, flight);
     }  
   });
 
@@ -181,15 +179,44 @@ io.on('connection', function (socket) {
     auctionLogic.setHighestBid(amount, io);
   });
 
-  socket.on('disconnect', () => {
+  //wipe the current auction
+  socket.on('clearAuctionHouse', () => {
+    console.log(`closing auction ${flight}`);
+    clearAuctionInstance(auctionLogic)
+  })
+
+  //if someone leaves an auction prematurely
+  socket.on('closeAuctionDisconnect', () => {
     auctionLogic.removeParticipants();
+    socket.leave(flight);
+
+    io.in(flight).emit('noOfBidders', auctionLogic.participants); //update bidders
+
     if(auctionLogic.participants == 0){
-      let set = new Set(Auctions);
-      set.delete(auctionLogic);
-      Auctions = Array.from(set);
+      clearAuctionInstance(auctionLogic);
     }
     console.log('client disconnected');
   });
+
+  //if the socket disconnects then follow these directions
+  socket.on('disconnect', () => {
+    auctionLogic.removeParticipants();
+    socket.leave(flight);
+
+    io.in(flight).emit('noOfBidders', auctionLogic.participants);
+
+    if(auctionLogic.participants == 0){
+      clearAuctionInstance(auctionLogic);
+    }
+    console.log('client disconnected');
+  })
 });
+
+function clearAuctionInstance(auctionLogic){
+  auctionLogic.closeAuction();
+  let set = new Set(Auctions);
+  set.delete(auctionLogic);
+  Auctions = Array.from(set);
+}
 
 module.exports = app;

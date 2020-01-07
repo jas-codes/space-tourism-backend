@@ -9,4 +9,7 @@ var ticketController = require('../controllers/ticketsController');
 //Post request for creating a ticket
 router.post('/ticket', ticketController.createTicket);
 
+//Get request for getting ticket by id
+router.get('/:ticketNumber', ticketController.getTicketById);
+
 module.exports = router;
