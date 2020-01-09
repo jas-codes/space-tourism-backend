@@ -15,4 +15,7 @@ router.get('/spaceships/:shipId', spaceshipController.getSpaceshipById);
 //Post request for creating a spaceship
 router.post('/spaceship', spaceshipController.createSpaceship);
 
+//Delete request for a spaceship
+router.delete('/spaceship', spaceshipController.deleteSpaceship);
+
 module.exports = router;

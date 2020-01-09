@@ -16,3 +16,7 @@ exports.createSpaceship = async function(req, res) {
 exports.getSpaceshipById = async function(req, res) {
   res.send(await spaceshipLogic.getSpaceshipById(req.params.shipId));
 }
+
+exports.deleteSpaceship = async function(req, res) {
+  res.send(await spaceshipLogic.deleteSpaceship(req.body.nameCode))
+}

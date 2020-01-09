@@ -10,4 +10,7 @@ router.post('/spaceFlight', spaceFlightController.createSpaceFlight);
 //Get all flights
 router.get('/spaceFlights', spaceFlightController.getAllSpaceFlights);
 
+//Delete space flight
+router.delete('/spaceFlight', spaceFlightController.deleteSpaceFlight);
+
 module.exports = router;

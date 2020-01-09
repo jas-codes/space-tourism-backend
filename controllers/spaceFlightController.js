@@ -8,3 +8,7 @@ exports.createSpaceFlight = async function(req, res) {
 exports.getAllSpaceFlights = async function(req, res) {
     res.send(await spaceFlightLogic.getAllSpaceFlights());
 }
+
+exports.deleteSpaceFlight = async function (req, res) {
+    res.send(await spaceFlightLogic.deleteSpaceFlight(req.body.flightNumber));
+}
