@@ -163,17 +163,14 @@ io.on('connection', function (socket) {
   });
 
   socket.on('joinedAuction', () => {
-    console.log('joined auction');
     io.in(flight).emit('noOfBidders', auctionLogic.participants);
   })
 
   socket.on('reservingSeats', (seats) => {
-    console.log(seats);
     socket.to(flight).emit('seatsBeingReserved', seats);
   })
 
   socket.on('unreservingSeats', (seat) => {
-    console.log(seat);
     socket.to(flight).emit('unreserveSeat', seat);
   })
 
@@ -182,7 +179,6 @@ io.on('connection', function (socket) {
 
     //if all players are ready or not
     if(!auctionLogic.ready()){
-      console.log('in other players');
       socket.to(flight).emit('otherPlayersReady', true);
     }
     else{

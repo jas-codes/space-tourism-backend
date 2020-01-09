@@ -34,6 +34,11 @@ async function updateFlightSeats(flightNumber, noOfSeats) {
     return 200;
 }
 
+async function deleteSpaceFlight(flightNumber) {
+    return await SpaceFlight.deleteMany({flightNumber: flightNumber});
+}
+
+module.exports.deleteSpaceFlight = deleteSpaceFlight;
 module.exports.updateFlightSeats = updateFlightSeats;
 module.exports.getSpaceFlights = getSpaceFlights;
 module.exports.createSpaceFlight = createSpaceFlight;

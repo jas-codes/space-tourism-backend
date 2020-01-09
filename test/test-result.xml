@@ -1,47 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.5760000000000001" tests="12" failures="0">
-  <testsuite name="Root Suite" timestamp="2020-01-09T00:29:37" tests="0" failures="0" time="0">
+<testsuites name="Mocha Tests" time="0.671" tests="16" failures="0">
+  <testsuite name="Root Suite" timestamp="2020-01-09T03:29:19" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="AuctionLogic Tests" timestamp="2020-01-09T00:29:37" tests="0" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
+  <testsuite name="AuctionLogic Tests" timestamp="2020-01-09T03:29:19" tests="0" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
   </testsuite>
-  <testsuite name="addParticipants Test" timestamp="2020-01-09T00:29:37" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
-    <testcase name="AuctionLogic Tests addParticipants Test should increment participants by 1" time="0" classname="should increment participants by 1">
+  <testsuite name="addParticipants Test" timestamp="2020-01-09T03:29:19" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0.001">
+    <testcase name="AuctionLogic Tests addParticipants Test should increment participants by 1" time="0.001" classname="should increment participants by 1">
     </testcase>
   </testsuite>
-  <testsuite name="removeParticipants Test" timestamp="2020-01-09T00:29:37" tests="2" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
+  <testsuite name="removeParticipants Test" timestamp="2020-01-09T03:29:19" tests="2" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
     <testcase name="AuctionLogic Tests removeParticipants Test should decrement participants by 0 (testCase: 1)" time="0" classname="should decrement participants by 0 (testCase: 1)">
     </testcase>
     <testcase name="AuctionLogic Tests removeParticipants Test should decrement participants by 1 (testCase: 2)" time="0" classname="should decrement participants by 1 (testCase: 2)">
     </testcase>
   </testsuite>
-  <testsuite name="addReadyParticipants Test" timestamp="2020-01-09T00:29:37" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
+  <testsuite name="addReadyParticipants Test" timestamp="2020-01-09T03:29:19" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
     <testcase name="AuctionLogic Tests addReadyParticipants Test should increment readyParticipants by 1" time="0" classname="should increment readyParticipants by 1">
     </testcase>
   </testsuite>
-  <testsuite name="removeReadyParticipants Test" timestamp="2020-01-09T00:29:37" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
+  <testsuite name="removeReadyParticipants Test" timestamp="2020-01-09T03:29:19" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
     <testcase name="AuctionLogic Tests removeReadyParticipants Test should decrement readyParticipants by 1" time="0" classname="should decrement readyParticipants by 1">
     </testcase>
   </testsuite>
-  <testsuite name="ready Test" timestamp="2020-01-09T00:29:37" tests="3" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0">
-    <testcase name="AuctionLogic Tests ready Test Should evaluate true given ready participants 0 and total participants 0" time="0" classname="Should evaluate true given ready participants 0 and total participants 0">
+  <testsuite name="ready Test" timestamp="2020-01-09T03:29:19" tests="3" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\auctionLogicTests.js" failures="0" time="0.001">
+    <testcase name="AuctionLogic Tests ready Test Should evaluate true given ready participants 0 and total participants 0" time="0.001" classname="Should evaluate true given ready participants 0 and total participants 0">
     </testcase>
     <testcase name="AuctionLogic Tests ready Test Should evaluate false given ready participants 0 and total participants 1" time="0" classname="Should evaluate false given ready participants 0 and total participants 1">
     </testcase>
     <testcase name="AuctionLogic Tests ready Test Should evaluate false given ready participants 1 and total participants 0" time="0" classname="Should evaluate false given ready participants 1 and total participants 0">
     </testcase>
   </testsuite>
-  <testsuite name="/GET all spaceFlights" timestamp="2020-01-09T00:29:37" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0.508">
-    <testcase name="/GET all spaceFlights it should GET all the spaceflights" time="0.508" classname="it should GET all the spaceflights">
+  <testsuite name="/Endpoint Tests for spaceFlights" timestamp="2020-01-09T03:29:19" tests="0" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Get tests for spaceflights endpoint" timestamp="2020-01-09T03:29:19" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0.427">
+    <testcase name="/Endpoint Tests for spaceFlights Get tests for spaceflights endpoint it should GET all the spaceflights" time="0.427" classname="it should GET all the spaceflights">
     </testcase>
   </testsuite>
-  <testsuite name="Testing logic for spaceFlights" timestamp="2020-01-09T00:29:38" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightLogicTests.js" failures="0" time="0">
+  <testsuite name="Post test for spaceflights endpoint" timestamp="2020-01-09T03:29:20" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0.002">
+    <testcase name="/Endpoint Tests for spaceFlights Post test for spaceflights endpoint it should POST a spaceFlight" time="0.002" classname="it should POST a spaceFlight">
+    </testcase>
+  </testsuite>
+  <testsuite name="Delete tests for spaceflights endpoint" timestamp="2020-01-09T03:29:20" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightEndpointTests.js" failures="0" time="0.001">
+    <testcase name="/Endpoint Tests for spaceFlights Delete tests for spaceflights endpoint should DELETE a spaceFlight" time="0.001" classname="should DELETE a spaceFlight">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing logic for spaceFlights" timestamp="2020-01-09T03:29:20" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceFlightLogicTests.js" failures="0" time="0">
     <testcase name="Testing logic for spaceFlights should create a flightVM model" time="0" classname="should create a flightVM model">
     </testcase>
   </testsuite>
-  <testsuite name="/GET Tests for spaceship Controller" timestamp="2020-01-09T00:29:38" tests="2" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0.068">
-    <testcase name="/GET Tests for spaceship Controller it should GET all the spaceships" time="0.036" classname="it should GET all the spaceships">
+  <testsuite name="Endpoint Tests for spaceship Controller" timestamp="2020-01-09T03:29:20" tests="0" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Spaceship Get Tests" timestamp="2020-01-09T03:29:20" tests="2" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0.23500000000000001">
+    <testcase name="Endpoint Tests for spaceship Controller Spaceship Get Tests it should GET all the spaceships" time="0.202" classname="it should GET all the spaceships">
     </testcase>
-    <testcase name="/GET Tests for spaceship Controller it should GET the spaceships by the id" time="0.032" classname="it should GET the spaceships by the id">
+    <testcase name="Endpoint Tests for spaceship Controller Spaceship Get Tests it should GET the spaceships by the id" time="0.033" classname="it should GET the spaceships by the id">
+    </testcase>
+  </testsuite>
+  <testsuite name="Spaceship Post Tests" timestamp="2020-01-09T03:29:20" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0.002">
+    <testcase name="Endpoint Tests for spaceship Controller Spaceship Post Tests it should POST a spaceship" time="0.002" classname="it should POST a spaceship">
+    </testcase>
+  </testsuite>
+  <testsuite name="Spaceship Delete Tests" timestamp="2020-01-09T03:29:20" tests="1" file="C:\Users\Joe&apos;s Computer\Documents\Important Docs\SOFT355\Coursework\space-tourism-API\test\spaceshipEndpointTests.js" failures="0" time="0.002">
+    <testcase name="Endpoint Tests for spaceship Controller Spaceship Delete Tests should DELETE a spaceship" time="0.002" classname="should DELETE a spaceship">
     </testcase>
   </testsuite>
 </testsuites>

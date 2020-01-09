@@ -34,6 +34,11 @@ function updateFlightSeats(flight, numberOfSeats) {
     return SpaceFlightRepo.updateFlightSeats(flight, numberOfSeats);
 }
 
+async function deleteSpaceFlight(flightNumber) {
+    return await SpaceFlightRepo.deleteSpaceFlight(flightNumber);
+}
+
+module.exports.deleteSpaceFlight = deleteSpaceFlight;
 module.exports.updateFlightSeats = updateFlightSeats;
 module.exports.createSpaceFlightVM = createSpaceFlightVM;
 module.exports.createSpaceFlight = createSpaceFlight;

@@ -24,6 +24,11 @@ function createSpaceship(req) {
     return 201;
 }
 
+async function deleteSpaceship(nameCode) {
+    return await Spaceship.deleteMany({nameCode: nameCode});
+}
+
+module.exports.deleteSpaceship = deleteSpaceship;
 module.exports.getSpaceships = getSpaceships;
 module.exports.createSpaceship = createSpaceship;
 module.exports.getSpaceshipById = getSpaceshipById;
