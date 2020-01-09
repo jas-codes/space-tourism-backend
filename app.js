@@ -159,16 +159,32 @@ io.on('connection', function (socket) {
       auctionLogic = new AuctionLogic(flightNumber);
       Auctions.push(auctionLogic);
     }
-
-    io.in(flight).emit('noOfBidders', auctionLogic.addParticipants());
+    auctionLogic.addParticipants();
   });
+
+  socket.on('joinedAuction', () => {
+    console.log('joined auction');
+    io.in(flight).emit('noOfBidders', auctionLogic.participants);
+  })
+
+  socket.on('reservingSeats', (seats) => {
+    console.log(seats);
+    socket.to(flight).emit('seatsBeingReserved', seats);
+  })
+
+  socket.on('unreservingSeats', (seat) => {
+    console.log(seat);
+    socket.to(flight).emit('unreserveSeat', seat);
+  })
 
   socket.on('readyToAuction', () => {
     auctionLogic.addReadyParticipants();
 
     //if all players are ready or not
-    if(!auctionLogic.ready())
+    if(!auctionLogic.ready()){
+      console.log('in other players');
       socket.to(flight).emit('otherPlayersReady', true);
+    }
     else{
       io.in(flight).emit('beginAuction', true);
       auctionLogic.beginTimer(io, flight);
